@@ -1,0 +1,59 @@
+{% extends "check_base.html" %} 
+
+{% block title %} User Following Page
+{% endblock %}
+
+{% block style %}
+<link
+rel="stylesheet"
+type="text/css"
+href="{{ url_for('static',filename='styles/style_search.css') }}"
+/>
+{% endblock %}
+
+{% block active_following %}active{% endblock %}
+
+
+{% block main_content %}
+
+        <div class="middle">
+            <div class="content-title">
+                
+                <h2>Following by you :</h2>
+            {% if user_list |length < 1 %}
+                <div class="not-found">
+                    <h3> No Following found </h3>
+                </div>
+                <h3> Follow some people to get posts ;)</h3>
+            </div>
+            {% else %}
+            {% for user in user_list %}
+            <div class="search-result">
+                <div class="user">
+                    <div class="profile-photo">
+                        {% if user['profile'] %}
+                        <img src="data:image/*;charset=utf-8;base64,{{ user['profile'] }}" alt="">
+                        {% else %}
+                        <img src="/static/img/user_profile.webp" alt="post user_profile picture">
+                        {% endif %} 
+
+
+                    </div>
+                    <div class="info">
+                        <a href="/user/profile/{{ user['data']['id'] }}">
+                        <h3>{{ user['data']['first_name'] }} {{ user['data']['last_name']}}</h3></a>
+                        <small>{{user['data']['user_name'] }}</small>
+                    </div> 
+                </div>
+                <div class="action-buttons">
+                    <div class="un-follow" onclick="unfollow(event),this.disabled= true">
+                        <button class="btn btn-primary" id="buttonunfollow-{{user['data'].id}}" data-unfollow_id="{{ user['data']['id'] }}">Un-Follow</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+           
+            {% endif %}
+        </div>
+        <script src="../static/js/follow_check.js"></script>
+{% endblock %}

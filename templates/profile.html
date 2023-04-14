@@ -1,0 +1,224 @@
+{% extends "check_base.html" %} 
+
+{% block title %} User Profile
+{% endblock %}
+
+{% block style %}
+<link
+rel="stylesheet"
+type="text/css"
+href="{{ url_for('static',filename='styles/style_profile.css') }}"
+/>
+{% endblock %}
+{% block active_profile %}active{% endblock %}
+
+{% block main_content %}
+
+            <div class="middle">
+                <div class="user-details">
+                    <div class="user">
+                        <div class="profile-photo">
+                            {% if profile %}
+                            <img src="data:image/*;charset=utf-8;base64,{{ profile }}" >
+                            {% else %}
+                            <img src="/static/img/user_profile.webp" >
+                            {% endif %}
+                        </div>
+                        <div class="user-info">
+                            <h3>{{ user_.first_name }} {{ user_.last_name }}</h3>
+                            <p class="text-muted">
+                                @{{ user_.user_name }} 
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user-posts-stats">
+                        <h3>Number of Posts</h3>
+                        <a href="#" >
+                            <p> {{ posts |length() }}</p></a>
+                    </div>
+                    <div class="user-followers">
+                        <h3>Followers</h3>
+                        <a href="/user/followers"><p> {{ followers | length()}} </p></a>
+                    </div>
+                    <div class="user-following">
+                        <h3>Followings</h3>
+                        <a href="/user/following"><p> {{following | length()}} </p></a>
+                    </div>
+                </div>
+
+                {% if user.id == user_.id %}
+                <div class="delete" id="button-{{user.id}}">
+                    <span class="edit">
+                        <button class="btn btn-primary" style="margin-left:80%; margin-top: 1rem;" onclick="deleteuser(event)"
+                        data-user_id="{{user.id}}">Delete Account</button>
+    
+                    </span>
+                    
+                </div>
+                <div class="confirm" style="display: none; margin-left: 30%; margin-top: 1rem;" id="delete-{{user.id}}">
+                    <h2> Are you sure wants to delete this Account ?</h2>
+                    <a href="/user/delete/{{user.id}}"><button class="btn btn-primary" style="background-color: red; margin-left: 60%;">Confirm</button></a>
+                    <a href="/user/profile"><button class="btn btn-primary" style="background-color: rgb(10, 215, 41);">Cancel</button></a>
+
+                </div>
+                {% endif %}
+                <div class="title">
+                    <h3>All posts</h3>
+                </div>
+                <div class="feeds">
+                    {% if posts | length < 1 %}
+                        <div class="no-posts">
+                           <h2> No Post.</h2>
+                           <p> Create a new post now  by clicking the <b> Create Post </b> button.</p>
+                        </div>
+                    {% else %}
+                    {% for post in posts %}
+                    <div class="feed" id="feed_post-{{post['data']['id']}}">
+                        <div class="head" >
+                            <div class="user">
+                                <div class="profile-photo">
+                                    {% if profile %}
+                                    <img src="data:image/*;charset=utf-8;base64,{{ profile }}" alt="">
+                                    {% else %}
+                                    <img src="/static/img/user_profile.webp" alt="post user_profile picture">
+                                    {% endif %}
+                                </div>
+                                <div class="info">
+                                    <h3>{{ user_.first_name }}</h3>
+                                    <small>{{ post['data']['created_on'] }}</small>
+                                </div> 
+                            </div>
+                            {% if post['data']['user_id'] == user.id %}
+                            <div class="curd-item">
+                            <span class="edit">
+                                <button class="btn" ><a href="/user/update_post/{{post['data']['id']}}"> Edit</a></button>
+                                <!-- <a href="/user/blog/delete/{{ post['data']['id'] }}"  class="edit" id = 'delete'>Delete</a> -->
+                            </span>
+                            <span class="edit">
+                                <button class="btn" onclick="DeletePost(event)"  data-post_data="{{post['data']['id']}}" style="color: brown;">Delete</button>
+                                <!-- <a href="/user/blog/delete/{{ post['data']['id'] }}"  class="edit" id = 'delete'>Delete</a> -->
+                            </span>
+                        </div>
+                            {% endif %}
+
+                        </div>
+                        <div class="caption">
+                            <p> <b> #{{ post['data']['tittle'] }}</b> <br> {{ post['data']['content'] }}
+                            </p>
+                        </div>
+                        {% if post['img'] %}
+                        <div class="photo">
+                            
+                            <img src="data:image/*;charset=utf-8;base64,{{ post['img'] }}" alt="...">
+          
+                        </div>
+                        {% endif %}
+                        <div class="action-buttons">
+                            <div class="iteractive-button">
+                                <button class="btn btn-primary" onclick="like(event),this.disabled=true"  data-blog_id="{{post['data']['id']}}"
+                        id="button-like-{{post['data']['id']}}">Like  👍 </button> 
+                            </div>
+                        </div>
+                        <div class="liked-by">
+                            <p>like by <b id="like-count-{{ post['data']['id'] }}" >{{ post['data']['likes'] }} </b> people</p>
+                        </div>
+                        <div class="comment-section" id="comments_{{ post['data']['id'] }}">
+                            {% if post['comments']  | length >0 %}
+        
+                            {% for i,comment in post.comments.items() %}
+                            <div class="comment">
+                                <h5>{{i}}</h5>
+                                <p>{{comment}}</p>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="comments text-muted">
+                            <form action="#" class="add-comment" data-blog_id="{{ post['data']['id'] }}" method="post"
+                            id="commentForm-{{ post['data']['id'] }}" onsubmit="add_comment(event)">
+                                <div class="profile-photo">
+                                    <img src="/static/Profile/{{user.id}}/profile.jpg" alt="user_profile picture">
+                                </div>
+                                <input type="text" placeholder="Add your comment..." id=" add-comment" name="comment"> 
+                              
+                                <button type="sumbit" class="btn btn-primary" id="add-comment">Add Comment </button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+
+                    {% endif %}
+                </div>
+            </div>
+            <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static',filename='styles/style_profile.css') }}"
+            />
+            <script >
+                
+function like(event){
+    blog = event.target
+    blog_id = blog.dataset.blog_id
+  
+  fetch('/blog/like/'+blog_id, {method: 'POST'}).then(function() {
+    // Update the like count on the page
+    var likeCount = document.getElementById('like-count-'+blog_id);
+    var likevar = document.getElementById('button-like-'+blog_id)
+    likevar.innerHTML =  'Liked';
+    likevar.style.background ='green';
+    likeCount.innerHTML = parseInt(likeCount.innerHTML) + 1;
+    
+
+  });
+  };
+
+                
+  function add_to_html(comment,section){
+  commentsSection = document.getElementById(section); 
+  commentElement = document.createElement('div');
+    commentElement.classList.add('comment');
+    commentElement.textContent = comment;
+        // add the comment to the comments section
+    commentsSection.appendChild(commentElement);
+    event.target.reset();
+};
+    function add_comment(event){
+      event.preventDefault();
+      const blog = event.target;
+      blog_id = blog.dataset.blog_id;
+      var section = 'comments_'+blog_id
+      const comment = event.target.elements.comment.value;
+      fetch('/user/blog/comment/'+comment+'/id/'+blog_id,{method:'POST'}).then(
+      add_to_html(comment,section))
+    };
+
+    function deleteuser(event){
+  a = event.target;
+  user_id = a.dataset.user_id;
+  let confirmation = confirm('Are you sure wants to delete your account? !!!!!! By clicking OK all your account data will be completly deleted!!!!!!')
+  if (confirmation){
+    button_div = document.getElementById('button-'+user_id)
+    button_div.style.display = 'none'
+    confirm_div = document.getElementById('delete-'+user_id)
+    console.log(confirm_div)
+    confirm_div.style.display = 'block'
+  };
+};
+function DeletePost(event){
+    a = event.target
+    post = a.dataset.post_data
+    post_div = document.getElementById('feed_post-'+post)
+    let confirmation = confirm('Are you sure wants to delete this post? ')
+    if (confirmation){
+        fetch('/user/blog/delete/'+post, {method:'DELETE'}).then( function(){
+        post_div.remove()})
+        
+    }
+    
+} 
+     
+     
+     </script>
+{% endblock %}

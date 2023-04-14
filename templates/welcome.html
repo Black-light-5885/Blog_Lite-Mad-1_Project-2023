@@ -1,0 +1,31 @@
+{% extends "base.html" %} 
+
+{% block title %} Welcom Home  
+{% endblock %}
+{% block style %}
+
+<link
+rel="stylesheet"
+type="text/css"
+href="{{ url_for('static',filename='styles/style_welcom.css') }}"
+/>
+{% endblock %}
+
+{% block content %}
+<div class="main_1">
+    <div class="content_home">
+      <h1 class="home_title"> Modern Application<br> <span> Development - I</span><br>Project - 
+        <span>Sep-2022</span> </h1>
+        <p class="para">
+            A blog functions as a space to showcase one’s
+             expertise and share knowledge.<br> Plus,
+             a blog is a great place 
+            to earn your target audience’s trust <br> so you can
+            promote the products and services you sell.
+        </p>
+        <button class="join_us"><a href="#"> Explore more</a></button>
+    </div>
+</div>
+{% endblock %}
+
+

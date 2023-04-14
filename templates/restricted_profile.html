@@ -1,0 +1,61 @@
+{% extends "check_base.html" %} 
+
+{% block title %} User Profile Page
+{% endblock %}
+
+{% block style %}
+<link
+rel="stylesheet"
+type="text/css"
+href="{{ url_for('static',filename='styles/style_profile.css') }}"
+
+/>
+<script src="{{ url_for('static',filename='js/follow_check.js') }}"></script>
+{% endblock %}
+{% block main_content %}
+
+            <div class="middle">
+                <div class="user-details">
+                    <div class="user">
+                        <div class="profile-photo">
+                            <img src="/static/img/user_profile.webp" alt="user_profile picture">
+                        </div>
+                        <div class="user-info">
+                            <h3>{{ user_.first_name }} {{ user_.last_name }}</h3>
+                            <p class="text-muted">
+                                @{{ user_.user_name }} 
+                            </p>
+                        </div>
+                        <div class="follow" id="follow-div-{{user_.id}}" onclick="follow(event),then.disable(true)" >
+                            <button class="btn btn-primary" id="buttonfollow-{{user_.id}}" data-follow_id="{{ user_.id }}">Follow</button>
+                        </div>
+        
+                    </div>
+                    <div class="user-posts-stats">
+                        <h3>Number of Posts</h3>
+                        <a href="#" >
+                            <p> {{ posts |length() }}</p></a>
+                    </div>
+                    <div class="user-followers">
+                        <h3>Followers</h3>
+                        <a href="#"><p> {{ followers | length()}} </p></a>
+                    </div>
+                    <div class="user-following">
+                        <h3>Followings</h3>
+                        <a href="#"><p> {{following | length()}} </p></a>
+                    </div>
+                </div>
+                
+                <div class="title">
+                    <h3>Post</h3>
+                </div>
+                <div class="feeds">
+                        <div class="no-posts">
+                           <h2> You can't see others posts unless you follow them</h2>
+                           <p> Click <b> Follow </b> to see all the posts.</p>
+                        </div>
+
+                </div>
+            </div>
+
+    {% endblock %}

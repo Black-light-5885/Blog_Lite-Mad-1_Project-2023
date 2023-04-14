@@ -1,0 +1,130 @@
+{% extends "base.html" %} 
+
+{% block title %} Register Page 
+{% endblock %}
+
+{% block style %}
+<link
+rel="stylesheet"
+type="text/css"
+href="{{ url_for('static',filename='styles/style_check.css') }}"
+/>
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <!------------- left ---------------->
+        <div class="left">
+            <a  class="profile">
+                <div class="profile-photo">
+                    <img src="/static/img/user_profile.webp">
+                </div>
+                <div class="handle">
+                    <h4> {{ user.first_name }} {{ user.last_name }}</h4>
+                    <p class="text-muted">
+                        @{{ user.user_name }}
+                    </p>
+                </div>
+            </a>
+            <!----- Side Bar ------->
+            <div class="sidebar">
+                <a class="menu-item active">
+                    <h3>Home</h3>
+                </a>
+                <a class="menu-item">
+                    <h3>Profile</h3>
+                </a>
+                <a class="menu-item">
+                    <h3>Followers</h3>
+                </a>
+                <a class="menu-item">
+                    <h3>bookmarks</h3>
+                </a>
+                <a class="menu-item">
+                    <h3>Following</h3>
+                </a>
+            </div>
+            <label for="create-post" class="btn btn-primary">Create Post</label>
+        </div>
+
+        
+        <!---------post area ----------->
+        <div class="middle">
+                <form action="#" class="create-post">
+                    <div class="profile-photo">
+                        <img src="/static/img/bg.jpg" alt="user_profile picture">
+                    </div>
+                    <input type="text" placeholder="What's on your mind?" id=" create-post"> 
+                    <input type="sumbit" value="Post" class="btn btn-primary">
+                </form>
+
+        
+
+            <div class="feeds">
+                {% for post in posts %}
+                <div class="feed">
+                    <div class="head">
+                        <div class="user">
+                            <div class="profile-photo">
+                                <img src="/static/img/user_profile.webp" alt="post user_profile picture">
+                            </div>
+                            <div class="info">
+                                <h3>{{ post['post_user'] }}</h3>
+                                <small>{{ post['data']['created_on'] }}</small>
+                            </div> 
+                        </div>
+                        {% if user.id == post['data']['user_id'] %}
+                        <span class="edit">
+                            <a href="/user/blog/delete/{{ post['data']['id'] }}"  class="edit" id = 'delete'>Delete</a>
+                        </span>
+                        {% endif %}
+                    </div>
+                    <div class="caption">
+                        <p> <b>{{ post['data']['tittle'] }}</b> <br> {{ post['data']['content'] }}
+                        <spam class="hash-tag">#hastags</spam></p>
+                    </div>
+                    {% if post['img'] %}
+                    <div class="photo">
+                        
+                        <img src="data:image/*;charset=utf-8;base64,{{ post['img'] }}" alt="...">
+      
+                    </div>
+                    {% endif %}
+                    <div class="action-buttons">
+                        <div class="iteractive-button">
+                            <button>like</button> 
+                        </div>
+                        <div class="iteractive-button">
+                            <button>comment</button>
+                        </div>
+                        <div class="bookmark">
+                            <p>bookmark</p>
+                        </div>
+                    </div>
+                    <div class="liked-by">
+                        <p>like by 10 peoples</p>
+                    </div>
+                    <div class="comments text-muted">
+                        <form action="#" class="create-post">
+                            <div class="profile-photo">
+                                <img src="/static/img/user_profile.webp" alt="user_profile picture">
+                            </div>
+                            <input type="text" placeholder="Add your comment..." id=" create-post"> 
+                            <input type="sumbit" value="Comment" class="btn btn-primary">
+                        </form>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+
+</main>
+<script src="../static/js/check_js.js"></script>
+{% endblock %}

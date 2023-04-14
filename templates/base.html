@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Welcome {% endblock %} </title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    crossorigin="anonymous"
+    />
+
+    <link
+rel="stylesheet"
+type="text/css"
+href="{{ url_for('static',filename='styles/main.css') }}"
+/>
+  {% block style %}
+
+
+  {% endblock %}
+  
+</head>
+<body>   
+      <div class="navbar_own">
+        <div class="icon">
+          <h2 class="logo">
+            Blog <span class="no-fill">Lite</span>
+          </h2>
+        </div>
+        <div class="menu">
+          <ul class="menu-content">
+            {% if user.is_authenticated %}
+            <li class="menu-content-item">
+              <a href="/user/home" id="Home"> Home</a>
+            </li>
+            {% else %}
+            <li class="menu-content-item">
+              <a href="/"  id="Home"> Home</a>
+            </li>
+            <li class="menu-content-item">
+              <a href="/login" id="Blogs"> Login</a>
+            </li>
+            <li class="menu-content-item" id="rigister">
+              <a href="/register" id="Profile"> Register</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+
+
+    
+
+
+{% block content %}
+
+{% endblock %}
+{% with messages = get_flashed_messages(with_categories = true) %}
+{% if messages %} 
+    {% for category,message in messages %} 
+                {% if category == 'error' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>{{message}}</strong> Try againg!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% else %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong> 
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+    {% endfor %}
+{% endif %}
+{% endwith %}
+</body>
+</html>

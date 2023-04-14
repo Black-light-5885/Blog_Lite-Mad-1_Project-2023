@@ -1,0 +1,110 @@
+
+*{
+    margin: 0%;
+    padding: 0%;
+    
+}
+.main_1{
+    width: 100%;
+    background: linear-gradient(to top ,rgba(0, 0, 0, 0.5)50%, rgba(0, 0, 0, 0.5)50%),url(../img/login_1.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 109vh;
+    position: fixed;
+
+}
+
+.form_login{
+    width: 350px;
+    height: 580px;
+    background: linear-gradient(to top,rgba(0,0,0,0.0)20%,rgba(101, 232, 237, 0.571)60%);
+    position: absolute;
+    top: 50px;
+    left: 590px;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+
+ .form_login .login_title{
+    width: 220px;
+    height: auto;
+    margin: auto;
+    color: #ff7200;
+    font-family: sans-serif;
+    text-align: center ;
+    font-size: 22px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-left: 35px;
+    padding: 10px;
+    font-weight: bold;
+ }
+
+ .form_login .back_to_register{
+
+    color: #fff;
+ }
+
+ .form_login input{
+    width: 240px;
+    height: 35px;
+    margin-left: 25px;
+    background: transparent;
+    border-bottom: 1px solid #ff7200;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 30px;
+    font-family: sans-serif;
+ }
+ .form_login input:focus{
+    outline: none;
+ }
+ ::placeholder{
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+ }
+
+ .btn_submit{
+    width: 240px;
+    height: 40px;
+    background:#ff7200 ;
+    border: none;
+    margin-top: 30px;
+    margin-left: 25px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: bold;
+}
+.btn_submit:hover{
+   color: #ff7200;
+   background: #fff;
+}
+
+.form_login .back_to_register{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    padding-top: 20px;
+    text-align: center;
+    color: #000;
+}
+.form_login .back_to_register a{
+    text-decoration: none;
+    color: #0022ff;
+    font-weight: bold;
+}
+
+.form_login .error_1{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+   
+}

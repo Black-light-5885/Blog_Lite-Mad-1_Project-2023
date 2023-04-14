@@ -1,0 +1,58 @@
+{% extends "check_base.html" %} 
+
+{% block title %} Create Post
+{% endblock %}
+
+{% block style %}
+<link
+rel="stylesheet"
+type="text/css"
+href="{{ url_for('static',filename='styles/style_create_post.css') }}"
+/>
+{% endblock %}
+
+{% block main_content %}
+
+<div class="middle">
+    <div class="create-post">
+        <form action="#" method="post" enctype="multipart/form-data">
+            <input type="submit" class="btn btn-primary top-button" value="Add Post" >
+            <div class="title">
+            <label for="Title"><span style="color:red;">*</span> Title :</label>
+            <input type="text" name="title" placeholder="Title of your post." required minlength="3" >
+            </div>
+
+            <div class="content">
+            <label for="content"><span style="color:red;">*</span> Content</label>
+            <textarea type="text" name="content" placeholder="Content of your post " required minlength="2"></textarea>
+            </div>
+            <div class="file" id="picture_upload">
+            <label for="picture">Picture</label>
+            <input type="file" accept="image/*" name="picture" id="imgInp">
+            
+
+            </div>
+            <label for="privacy">Privacy</label>
+            
+            <select class="form_select" name="privacy" required>
+                <option >Select</option>
+                <option selected value="false">Public</option>
+                <option value="true">Private</option>
+              </select><br> <br> 
+            <input type="submit" class="btn btn-primary" value="Add Post">
+        </form>
+    </div>
+    <script>
+        
+const picture = document.getElementById("picture_upload");
+imgInp.onchange = evt => {
+  const [file] = imgInp.files;
+  if (file) {
+    view_pic = document.createElement('img');
+    view_pic.src = URL.createObjectURL(file);
+    view_pic.style = "margin: 1rem; overflow: hidden; width: 50%;";
+    picture.appendChild(view_pic);
+  }
+}
+    </script>
+{% endblock %}

@@ -1,0 +1,113 @@
+
+*{
+    margin: 0%;
+    padding: 0%;
+    
+}
+
+
+.navbar_own{
+    width: auto;
+    height: 75px;
+    margin: auto;
+    background-color: rgb(31, 31, 31);
+
+}
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+.logo{
+    color: #ff7200;
+    font-size: 35px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-left: 10px;
+    float: left;
+    padding-top: 10px;
+}
+.logo .no-fill{
+    font-style: italic;
+    color: transparent;
+    -webkit-text-stroke: 0.5px #ffffff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.menu{
+    width: 400px;
+    float: left;
+    height: 70px;
+
+}
+.menu-content{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu-content-item{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 20px;
+}
+
+.menu-content-item a{
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    transition: 0.1s ease-in-out;
+}
+.menu-content-item a:hover{
+    color: #ff7200;
+}
+.menu-content-item #Logout{
+    position: fixed;
+    top:27px;
+    right:50px;
+    z-index:10;
+}
+.search{
+    width: 330px;
+    float: left;
+    margin-left: 270px;
+}
+.srch{
+    font-family: 'Times New Roman', Times, serif;
+    width: 200px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid #ff7200;
+    margin-top: 20px;
+    color: #fff;
+    border-right: none;
+    font-size: 16px;
+    float: left;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+
+}
+.btn_nav_search{
+    width: 100px;
+    height: 40px;
+    background:#ff7200 ;
+    border: 2px solid #ff7200;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 15px;
+    border-bottom-right-radius: 5px;
+}
+.btn_nav_search:focus{
+    outline: none;
+}
+
+.srch:focus{
+    outline: none;
+}
+
+#rigister{
+    margin-left: 55rem;
+    z-index: 1rem;
+}

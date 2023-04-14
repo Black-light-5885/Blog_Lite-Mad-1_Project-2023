@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Welcome {% endblock %} </title>
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static',filename='styles/style_check_base.css') }}"
+    />
+    {% block style %}
+
+    {% endblock %}
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h2 class="logo">
+                Blog-Lite
+            </h2>
+            <div class="search-bar">
+                <form action="/user/search" method="post">
+                <button type="submit" class="search">
+                    Search
+                </button>
+                <input type="search" name="search_key"  placeholder="@Search user here" minlength="1" required>
+                </form>
+            </div>
+            <div class="top_left">
+                <div >
+                   <button class="btn"><a href="/logout" class="logout"> Logout</a></button> 
+                </div>
+                <div class="profile-photo">
+                    <img src="/static/Profile/{{user.id}}/profile.jpg" >
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!------------- left ---------------->
+            <div class="left">
+                <a  class="profile">
+                    <div class="profile-photo">
+                        <img src="/static/Profile/{{user.id}}/profile.jpg" >
+                    </div>
+                    <div class="handle">
+                        <h4> {{ user.first_name }} {{ user.last_name }}</h4>
+                        <p class="text-muted">
+                            @{{ user.user_name }}
+                        </p>
+                    </div>
+                </a>
+                <!----- Side Bar ------->
+                <div class="sidebar">
+                    <a class="menu-item {% block active_home %}{% endblock %}" href="/user/home">
+                        <h3>Home</h3>
+                    </a>
+                    <a class="menu-item {% block active_profile %}{% endblock %}" href="/user/profile">
+                        <h3>Profile</h3>
+                    </a>
+                    <a class="menu-item {% block active_followers %}{% endblock %}" href="/user/followers">
+                        <h3>Followers</h3>
+                    </a>
+                    
+                    <a class="menu-item {% block active_following %}{% endblock %}" href="/user/following">
+                        <h3>Following</h3>
+                    </a>
+                    <!-- <a class="menu-item">
+                        <h3>bookmarks</h3>
+                    </a> -->
+                </div>
+                <label for="create-post" class="btn btn-primary"><a href="/user/create_blog"> Create Post </a></label>
+            </div>
+        {% block main_content %}
+
+
+        {% endblock %} 
+        </div>    
+    </main>
+
+</body>
+<script src="../static/js/check_js.js"></script>
+
+</html>

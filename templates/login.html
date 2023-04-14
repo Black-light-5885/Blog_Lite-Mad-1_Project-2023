@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+
+{% block title %} login Page 
+{% endblock %}
+
+{% block style %}
+<link
+rel="stylesheet"
+type="text/css"
+href="{{ url_for('static',filename='styles/style_login.css') }}"
+/>
+
+{% endblock %}
+
+{% block content %}
+<div class="main_1">
+  <div class="form_login" method="POST">
+    <h2 class="login_title"> Login Here</h2>
+    {% if error_1 %}
+    <br />
+    <p class="error_1">User Name or Password wrong!. <br> Try again</p>
+    {% endif %}
+    <form action="" method="post">
+    <input type="text" name="user_name" id="" placeholder="Enter user name">
+    <input type="password"  name="password" placeholder="Enter Password">
+    <button class="btn_submit" type="submit" >Login</button>
+  </form>
+    <p class="back_to_register">Don't have account?<br><br>
+    <a href="/register" class="register"> Register</a> Here</p>
+
+  </div> 
+</div>
+{% endblock %}

@@ -1,0 +1,466 @@
+openapi: 3.0.3
+info:
+  title: Blog Lite
+  description: |-
+
+  version: 1.0.11
+servers:
+  - url: http://127.0.0.1:5000
+tags:
+  - name: User
+    description: Everything about Users
+  - name: Posts
+    description: Access to all the posts
+  - name: Actions
+    description: Operations on user followers and Post Comments
+paths:
+  /api/user/{user_name}:
+    get:
+      tags:
+        - User
+      description: Getting information about user
+      parameters:
+          - in: path
+            name: user_name
+            required: true
+            schema:
+              type: string
+              example: bala_123
+              
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                  title: user_object
+                  type : object
+                  properties :
+                    user_id:
+                      type: number
+                      example : 1
+                    first_name:
+                      type: string
+                      example : Bala
+                    last_name:
+                      type: string
+                      example : Murugan
+                    gender:
+                      type: string
+                      example : Male
+                    user_name:
+                      type: string
+                      example : bala_123
+                    
+        '400':
+          description: Bad request!
+        '404':
+          description : User Not found!
+        '500':
+          description : Internal Server Error!
+          
+
+    put:
+      tags:
+        - User
+      description: Update the user 
+      parameters:
+        - in: path
+          name: user_name
+          required: true
+          schema:
+            type: string
+            example: ali
+            
+      requestBody:
+        description: Update an existent pet in the store
+        content:
+          application/json:
+            schema:
+              type: object
+              properties :
+                first_name:
+                  type: string
+                  example: BalaM
+                last_name:
+                  type: string
+                  example: murugan
+                
+              
+          
+      responses:
+        '200':
+          description: Updated Successfully.
+          content:
+            application/json:
+              schema:
+                  title: user_object
+                  type : object
+                  properties :
+                    user_id:
+                      type: number
+                      example : 1
+                    first_name:
+                      type: string
+                      example : BalaM
+                    last_name:
+                      type: string
+                      example : murugan
+                    gender:
+                      type: string
+                      example : Male
+                    user_name:
+                      type: string
+                      example : bala_123
+                    
+        '400':
+          description: Bad request!
+        '404':
+          description : User Not found!
+        '405':
+          description: Invalid input!
+        '500':
+          description : Internal Server Error!
+    delete:
+      tags:
+        - User
+      description: Delete a user
+      parameters:
+          - in: path
+            name: user_name
+            required: true
+            schema:
+              type: string
+              example: bala_123
+              
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad request!
+        '404':
+          description : User Not found!
+        '500':
+          description : Internal Server Error!
+
+  /api/user:
+    description: End point to Add new user
+    post:
+      description: Add new user to the Database
+      tags:
+        - User
+        
+      requestBody:
+        description: Add new user to the Database
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example : bala
+
+                last_name:
+                  type: string
+                  example : M
+                user_name:
+                  type: string
+                  example: bala_456
+
+                gender:
+                  type: string
+                  example: Male/Female
+
+                password:
+                  type: string
+                  example: password
+               
+      responses:
+        '201':
+          description: Added Successfully.
+        '400':
+          description: Bad request!
+
+        '405':
+          description: Invalid input!
+        '500':
+          description : Internal Server Error!  
+           
+        
+
+  /api/post/{id}:
+    get:
+      tags:
+        - Posts
+      summary: Find post by ID
+      description: Getting information about post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 1
+        
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                  title: user_object
+                  type : object
+                  properties :
+                    post_id:
+                      type: number
+                      example : 1
+                    user_id:
+                      type: integer
+                      example: 1
+                    Title:
+                      type: string
+                      example : Post Title
+                    Content:
+                      type: string
+                      example : Post content
+                    
+        '400':
+          description: Bad request!
+        '404':
+          description : Post Not found!
+        '500':
+          description : Internal Server Error!
+          
+
+    put:
+      tags:
+        - Posts
+      summary: Update the post content
+      description: Update the post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 1
+            
+      requestBody:
+        description: Update an existent post in the store
+        content:
+          application/json:
+            schema:
+              type: object
+              properties :
+                    user_id:
+                      type: integer
+                      example: 1
+                    Title:
+                      type: string
+                      example : New title here
+                    Content:
+                      type: string
+                      example : New content here
+                
+              
+          
+      responses:
+        '200':
+          description: Updated Successfully.
+          content:
+            application/json:
+              schema:
+                  title: user_object
+                  type : object
+                  properties :
+                    user_id:
+                      type: integer
+                      example: 1
+                    Title:
+                      type: string
+                      example : New title here
+                    Content:
+                      type: string
+                      example : New content here
+                    
+        '400':
+          description: Bad request!
+        '404':
+          description : Posts Not found!
+        '405':
+          description: Invalid input!
+        '500':
+          description : Internal Server Error!
+    delete:
+      tags:
+        - Posts
+      summary: Delete the post 
+      description: Delete a Posts
+      
+      parameters:
+          - in: path
+            name: id
+            required: true
+            schema:
+              type: integer
+              example: 1
+              
+      responses:
+        '200':
+          description: Successfully Deleted
+        '400':
+          description: Bad request!
+        '404':
+          description : Posts Not found!
+        '500':
+          description : Internal Server Error!
+
+  /api/post:
+    
+    post:
+      description: Add new post to the Database
+      tags:
+        - Posts
+      summary: End point to Add new post
+      requestBody:
+        description: Add new post to the Database
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                      type: integer
+                      example: 1
+                Title:
+                  type: string
+                  example : Post title here
+
+                Content:
+                  type: string
+                  example : Add your post content here
+               
+      responses:
+        '201':
+          description: Added Successfully.
+        '400':
+          description: Bad request!
+
+        '405':
+          description: Invalid input!
+        '500':
+          description : Internal Server Error!  
+
+
+  /api/follow/{user_name}:
+    post:
+      description: Add new post to the Database
+      tags:
+        - Actions
+      summary: End point to Add new follower
+      parameters:
+        - in: path
+          name: user_name
+          required: true
+          schema:
+            type: string
+            example: bala_123
+            
+      requestBody:
+        description: Add new follower to the Database
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                follower_user_name:
+                  type: string
+                  example : User name
+               
+      responses:
+        '201':
+          description: Added Successfully.
+        '400':
+          description: Bad request!
+
+        '405':
+          description: Invalid input!
+        '500':
+          description : Internal Server Error!  
+
+  /api/unfollow/{user_name}{follower_user_name}:
+    delete:
+      description:  remove follower from the Database
+      tags:
+        - Actions
+      summary: End point to remove follower
+      parameters:
+        - in: path
+          name: user_name
+          required: true
+          schema:
+            type: string
+            example: bala_123
+        - in: path
+          name: follower_user_name
+          required: true
+          schema:
+            type: string
+            example: bala_123
+               
+      responses:
+        '201':
+          description: Removed Successfully.
+        '400':
+          description: Bad request!
+
+        '405':
+          description: Invalid input!
+        '500':
+          description : Internal Server Error!  
+      
+  /api/all_post/{user_name}:
+    get:
+      tags:
+        - Posts
+      summary: Find all posts 
+      description: Getting information about post
+      parameters:
+        - in: path
+          name: user_name
+          required: true
+          schema:
+            type: string
+            example: bala
+        
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                  title: user_object
+                  type : object
+                  properties :
+                    post_id:
+                      type: number
+                      example : 1
+                    user_id:
+                      type: integer
+                      example: 1
+                    Title:
+                      type: string
+                      example : Post Title
+                    Content:
+                      type: string
+                      example : Post content
+                    
+        '400':
+          description: Bad request!
+        '404':
+          description : Post Not found!
+        '500':
+          description : Internal Server Error!
+          
+

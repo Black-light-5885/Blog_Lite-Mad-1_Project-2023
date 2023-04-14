@@ -1,0 +1,146 @@
+
+*{
+    margin: 0%;
+    padding: 0%;
+    
+}
+.main_1{
+    width: 100%;
+    background: linear-gradient(to top ,rgba(0, 0, 0, 0.5)50%, rgba(0, 0, 0, 0.5)50%),url(../img/login_1.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 109vh;
+    position: fixed;
+
+}
+
+.form_login{
+    width: 620px;
+    height: 580px;
+    background: linear-gradient(to top,rgba(0,0,0,0.0)10%,rgba(101, 232, 237, 0.571)80%);
+    position: absolute;
+    top: 30px;
+    left: 460px;
+    border-radius: 10px;
+    padding: 25px;
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
+}
+
+
+ .form_login .login_title{
+    width: 220px;
+    height: auto;
+    margin: auto;
+    color: #ff7200;
+    font-family: sans-serif;
+    text-align: center ;
+    font-size: 22px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-left: 180px;
+    padding: 7px;
+    font-weight: bold;
+ }
+
+ .form_login .back_to_register{
+
+    color: #fff;
+ }
+
+ .form_login input{
+    width: 240px;
+    height: 35px;
+    margin-left: 25px;
+    background: transparent;
+    border-bottom: 1px solid #ff7200;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    color: black;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 25px;
+    font-family: sans-serif;
+ }
+ .form_login input:focus{
+    outline: none;
+ }
+ ::placeholder{
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+ }
+
+ .btn_submit{
+    width: 240px;
+    height: 40px;
+    background:#ff7200 ;
+    border: none;
+    margin-top: 10px;
+    margin-left: 150px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: bold;
+}
+.btn_submit:hover{
+   color: #ff7200;
+   background: #fff;
+}
+
+.form_login .back_to_register{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    padding-top: 20px;
+    text-align: center;
+    color: #000;
+    
+}
+.form_login .back_to_register a{
+    text-decoration: none;
+    color: #0b4ef8;
+    font-weight: bold;
+}
+
+.form_login .error_1{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+   
+}
+.form_login #input_big{
+    width: 400px;
+}
+.form_login #last_name{
+    margin-left: 60px;
+}
+.form_login .gender{
+    margin-top: 20px;
+    margin-left: 25px;
+    font-weight: bold;
+}
+.form_login .form_select{
+    width: 100px;
+    margin-left: 20px;
+    appearance: none;
+    background-color: transparent;
+    border-bottom: 1px solid #ff7200;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    /* padding: 0 1em 0 0; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    line-height: normal;
+    outline: none;
+    text-align: center;
+}
+
+.form_login .form_select:focus{
+    outline: none;
+    text-align: center;
+  }
