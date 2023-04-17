@@ -35,8 +35,8 @@ api.add_resource(Actions,'/api/follow/<string:user_name>',
 api.add_resource(AllPost,'/api/all_post/<string:u_name>')
 
 if __name__ == "__main__":
-    app.secret_key = 'super secret key'
-    app.config['SESSION_TYPE'] = 'filesystem'
+#     app.secret_key = 'super secret key'
+#     app.config['SESSION_TYPE'] = 'filesystem'
 
     # sess.init_app(app)
 
